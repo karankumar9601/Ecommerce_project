@@ -4,6 +4,7 @@ const {addProduct,viewProduct,getSingleProduct,updateProduct,deleteProduct}=requ
 const adminMiddleware=require("../Middleware/adminMiddleWareAuth")
 const upload=require("../Middleware/imageMiddleware")
 
+//all product routes
 productRouter.post('/products',adminMiddleware,upload.single("image"),addProduct);
 productRouter.get('/products',adminMiddleware,viewProduct);
 productRouter.get('/product/:id',adminMiddleware,getSingleProduct);
