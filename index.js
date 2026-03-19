@@ -17,13 +17,13 @@ app.use(cors({
     origin: "https://bhagalpurmart.netlify.app",
     credentials: true
 }));
-
+//url of all API 
 app.use('/user', authRouter)
 app.use('/admin',userRouter)
 app.use('/admin',managerRouter)
 app.use('/admin',productRouter)
 
-
+//conection estabilish
 const initialConnection = async () => {
     await Promise.all([main(),redisClients.connect()]);
     console.log("DB connect")
