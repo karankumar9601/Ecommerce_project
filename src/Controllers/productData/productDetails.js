@@ -3,20 +3,23 @@ const product = require("../../Model/itemsModel")
 
 
 const addProduct = async (req, res) => {
-    const productData = {
-        ...req.body,
-        image: res.secure_url,
-    }
+
     try {
         if (!req.file) {
-            res.json({
+            return res.json({
                 success: false,
-                message: "Image Required"
+                message: "Image not found"
             })
         }
+     
         const response = await uploadOnCloudinary(req.file.path)
+     
+        const productData = {
+            ...req.body,
+            image: response.secure_url,
+        }
         if (!response) {
-            res.json({
+            return res.json({
                 success: false,
                 message: "image not save on cloudinary"
             })
@@ -24,45 +27,48 @@ const addProduct = async (req, res) => {
         }
         const productInfo = await product.create(productData);
         if (!productInfo) {
-            res.json({
+            return res.json({
                 success: false,
                 message: "product information is not save in Database"
             })
         }
-        res.json({
-            success:true,
-            message:"product added successfully",
-            data:product
+        return res.json({
+            success: true,
+            message: "product added successfully",
+            data: product
         })
     } catch (error) {
-       res.json({
-        success:false,
-        message:error.message
-       })
+        res.json({
+            success: false,
+            message: error.message
+        })
     }
 
 }
 
 const viewProduct = async (req, res) => {
-    try{
-          const result= await product.find();
-          if (!result) {
-            res.json({
-                success:false,
-                message:"product Details not found"
+    try {
+        const result = await product.find();
+        if (!result) {
+           return res.json({
+                success: false,
+                message: "product Details not found"
             })
-          }
+        }
+         return res.json({
+            success: true,
+            message: "All Product Fetched",
+            data: result
+        })
+
+    } catch (error) {
           res.json({
-            success:true,
-            message:"All Product Fetched",
-            data:result
+            success:false,
+            message:error.message
           })
-
-    }catch(error){
-
     }
-  
-   
+
+
 
 }
 const getSingleProduct = async (req, res) => {

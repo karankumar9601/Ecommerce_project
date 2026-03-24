@@ -12,7 +12,7 @@ const ItemsData = new Schema({
         type: String,
         required: true,
         minlength: [3, "title minimum atlist 3 character"],
-        maclength: [20, "fullName is contains maximum 20 charcter"],
+        maxlength: [20, "fullName is contains maximum 20 charcter"],
         trim: true
     },
     price: {
@@ -26,6 +26,13 @@ const ItemsData = new Schema({
         type: String,
         required: true,
         minlength: [30, "minimun 30 character"],
+        trim: true
+
+    },
+    total_product:{
+        type:Number,
+        required:true,
+        min: [0, "Invalid Value"],
         trim: true
 
     },
@@ -49,13 +56,11 @@ const ItemsData = new Schema({
     rating: {
         rate: {
             type: Number,
-            required: true,
             minlength: [0, "negative no is not allowed"],
             maxlength: [5, "max 5 point is allowed"]
         },
         count: {
             type: Number,
-            required: true,
             minlength: [0, "negative no is not allowed"],
             maxlength: [1000, "max 1000 items ia allowed"],
 
