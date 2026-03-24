@@ -14,7 +14,7 @@ const app = express();
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
-    origin: "https://bhagalpurmart.netlify.app",
+    origin: "http://localhost:5173",
     credentials: true
 }));
 //url of all API 
