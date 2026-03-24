@@ -7,5 +7,4 @@ const {viewProduct} =require("../Controllers/productData/productDetails")
 //all user routes
 userRouter.get('/user/getAllUser',adminMiddleware,getAllUser)
 userRouter.get('/getAllProduct',viewProduct)
-
 module.exports=userRouter;
