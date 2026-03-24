@@ -60,7 +60,6 @@ const viewProduct = async (req, res) => {
             message: "All Product Fetched",
             data: result
         })
-
     } catch (error) {
           res.json({
             success:false,
